@@ -1,0 +1,23 @@
+
+This collection of utility scripts is designed to help anyone using Bitnami app stack VMs with VirtualBox get started quickly.
+
+
+## Requirements
+
+Before these scripts are useful, you'll first need to download and install VirtualBox from their [downloads page](https://www.virtualbox.org/wiki/Downloads).
+
+If you haven't already downloaded a Bitnami VM that you intend to use, then you should grab one (or more) from [here](http://bitnami.org/stacks).
+
+
+## Create the VirtualBox VM definition
+
+Once you've got VirtualBox installed and have a Bitnami stack VM downloaded and expanded, figure out the absolute path of the main VM file (*.vmdk) and run the `create-vm.sh` like so:
+
+    $ ./create-vm.sh "My Bitnami VM" /path/to/bitnami/primary-disk-image.vmdk
+
+The script will create and configure your new VM to use a copy of the downloaded Bitnami VM HDD, and have configured your VM's networking so that it can easily be accessed by your host OS.  Once the configured VM is all set up, the script will also launch it.
+
+
+## Prepare the Guest OS
+
+TBD
