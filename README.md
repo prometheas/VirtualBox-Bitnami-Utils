@@ -1,12 +1,14 @@
 
-This collection of utility scripts is designed to help anyone using Bitnami app stack VMs with VirtualBox get started quickly.
+This collection of utility scripts is designed to help anyone using Bitnami appliance VMs in tandem with VirtualBox to get started quickly.
+
+The VMs that these scripts set up connect to a private "sandbox" network that is only visible to the host OS (your workstation) and to its guest VMs.  They are not visible to any other machines on your LAN.  But since each VM can see one another, these scripts help you simulate environments with multiple different servers that communicate with eachother (eg, a MySQL server, a PHP application running on Apache, and a nodejs messaging service).
 
 
 ## Requirements
 
 Before these scripts are useful, you'll first need to download and install VirtualBox from their [downloads page](https://www.virtualbox.org/wiki/Downloads).
 
-You'll also want to set up some way to mount "remote" volumes over SSH.  This will allow you to mount directories from the guest OS's filesystem into your host OS, and edit files using your favorite text editor.  I recommend using SSHFS as an OSS solution, but there are a variety of commercial apps out there that can handle such mounting operations, including Expandrive, Transmit, Forklift, and others.
+You'll also want to set your host OS up with some way to mount "remote" volumes over SSH.  This will allow you to mount directories from a guest OS's filesystem for access from appliations running on your host OS.  This is particularly handy because the Bitnami VMs do not have GUI environments, so mounting directories onto the host OS will permit you to edit files using your favorite text editor.  I recommend using SSHFS as an OSS solution, but there are a variety of commercial apps out there that can handle such mounting operations, including Expandrive, Transmit, Forklift, and others.
 
 If you haven't already downloaded a Bitnami VM that you intend to use, then you should grab one (or more) from [here](http://bitnami.org/stacks).
 
@@ -17,12 +19,12 @@ Once you've got VirtualBox installed and have a Bitnami stack VM downloaded and 
 
     $ ./create-vm.sh "My Bitnami VM" /path/to/bitnami/primary-disk-image.vmdk
 
-The script will create and configure your new VM to use a copy of the downloaded Bitnami VM HDD, and have configured your VM's networking so that it can easily be accessed by your host OS.  Once the configured VM is all set up, the script will also launch it.
+The script will create and configure your new VM to use a copy of the downloaded Bitnami VM HDD, and have configured your VM's networking so that it can easily be accessed by your host OS.  Once the configured VM is all set up, the script will also launch it immediately.
 
 
 ## Prepare the Guest OS
 
-Once the guest OS has booted, you'll need to login to the Bitnami VM.  The username and password and both `bitnami`, but you'll be prompted to pick a new password.  Once you've logged in and you're looking at the shell, enter the following commands:
+Once the guest OS has booted, you'll need to login to the Bitnami VM.  The username and password are both `bitnami`, but you'll be prompted to pick a new password.  Once you've logged in and you're looking at the shell, enter the following commands:
 
     $ curl https://raw.github.com/prometheas/VirtualBox-Bitnami-Utils/master/guest/prepare-vm.sh > prepare-vm.sh
 	$ chmod +x prepare-vm.sh
