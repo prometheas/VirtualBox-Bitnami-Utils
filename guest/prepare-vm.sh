@@ -72,8 +72,8 @@ prepare_ssh()
 
 update_packages()
 {
-	apt-get update
-	apt-get upgrade
+	yes | apt-get update
+	yes | apt-get upgrade
 }
 
 
