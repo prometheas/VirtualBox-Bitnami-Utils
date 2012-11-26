@@ -45,6 +45,7 @@ prepare_network()
 	echo "*" Add the following to /etc/network/interfaces file:
 	echo "***********************************************************"
 	echo
+	tput setaf 2
 	echo "#" The host-only network interface
 	echo auto eth1
 	echo iface eth1 inet static
@@ -52,6 +53,7 @@ prepare_network()
 	echo netmask 255.255.255.0
 	echo network $NETWORK_ID.0
 	echo broadcast $NETWORK_ID.255
+	tput sgr0
 	echo
 }
 
@@ -78,17 +80,20 @@ update_packages()
 prepare_sshfs()
 {
 	echo Preparing sshfs...
-	apt-get install sshfs
+	yes | apt-get install sshfs
 	start sshfs
 	echo "You may now mount directories in this VM onto your host OS using sshfs!"
+}
+
+install_tools()
+{
+	echo Installing Subversion **************************************
+	yes | apt-get install subversion curl
 }
 
 
 prepare_user()
 {
-	echo "***********************************************************"
-	echo "*" Add the following to /etc/network/interfaces file:
-	echo "***********************************************************"
 	echo
 	echo -n "Would you like to create your own user? [Y/n]: "
 	read answer
