@@ -39,8 +39,8 @@ prepare_network()
 
 	# set the IP address of the chosen interface
 	echo
-	echo ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
-	ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
+	echo ifconfig $INTERFACE $GUEST_IP netmask 255.255.255.0 up
+	ifconfig $INTERFACE $GUEST_IP netmask 255.255.255.0 up
 
 	INTERFACES_FILE=/etc/network/interfaces
 	ETH1_DECLARATION=`grep 'iface eth1' $INTERFACES_FILE`
