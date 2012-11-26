@@ -38,23 +38,27 @@ prepare_network()
 	fi
 
 	# set the IP address of the chosen interface
-	sudo ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
+	echo
+	echo ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
+	ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
 
-	echo
-	echo "***********************************************************"
-	echo "*" Add the following to /etc/network/interfaces file:
-	echo "***********************************************************"
-	echo
-	tput setaf 2
-	echo "#" The host-only network interface
-	echo auto eth1
-	echo iface eth1 inet static
-	echo address $GUEST_IP
-	echo netmask 255.255.255.0
-	echo network $NETWORK_ID.0
-	echo broadcast $NETWORK_ID.255
-	tput sgr0
-	echo
+	INTERFACES_FILE=/etc/network/interfaces
+	ETH1_DECLARATION=`grep 'iface eth1' $INTERFACES_FILE`
+	if [[ $ETH1_DECLARATION == "" ]]; then
+		echo "" >> $INTERFACES_FILE
+		echo "***********************************************************" >> $INTERFACES_FILE
+		echo "*" Add the following to /etc/network/interfaces file: >> $INTERFACES_FILE
+		echo "***********************************************************" >> $INTERFACES_FILE
+		echo "" >> $INTERFACES_FILE
+		echo "#" The host-only network interface >> $INTERFACES_FILE
+		echo auto eth1 >> $INTERFACES_FILE
+		echo iface eth1 inet static >> $INTERFACES_FILE
+		echo address $GUEST_IP >> $INTERFACES_FILE
+		echo netmask 255.255.255.0 >> $INTERFACES_FILE
+		echo network $NETWORK_ID.0 >> $INTERFACES_FILE
+		echo broadcast $NETWORK_ID.255 >> $INTERFACES_FILE
+		echo >> $INTERFACES_FILE
+	fi
 }
 
 
