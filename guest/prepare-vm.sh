@@ -38,7 +38,7 @@ prepare_network()
 	fi
 
 	# set the IP address of the chosen interface
-	ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
+	sudo ifconfig $INTERFACE_INFO $GUEST_IP netmask 255.255.255.0 up
 
 	echo
 	echo "***********************************************************"
