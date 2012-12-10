@@ -45,10 +45,10 @@ prepare_network()
 	INTERFACES_FILE=/etc/network/interfaces
 	ETH1_DECLARATION=`grep 'iface eth1' $INTERFACES_FILE`
 	if [[ $ETH1_DECLARATION == "" ]]; then
-		echo "" >> $INTERFACES_FILE
-		echo "***********************************************************" >> $INTERFACES_FILE
-		echo "*" Add the following to /etc/network/interfaces file: >> $INTERFACES_FILE
-		echo "***********************************************************" >> $INTERFACES_FILE
+		echo ""
+		echo "***********************************************************"
+		echo "*" Adding network interface to /etc/network/interfaces file:
+		echo "***********************************************************"
 		echo "" >> $INTERFACES_FILE
 		echo "#" The host-only network interface >> $INTERFACES_FILE
 		echo auto eth1 >> $INTERFACES_FILE

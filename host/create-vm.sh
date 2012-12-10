@@ -19,15 +19,24 @@ create_virtual_machine()
 {
 	echo Creating VM \"$VM_NAME\"
 	VBoxManage createvm --name "$VM_NAME" --ostype Ubuntu --register
+
+  #configure host-only networks
+  HOSTONLY_NETWORKS=$(VBoxManage list hostonlyifs | grep 'vboxnet0' | cut -d '"' -f2)
+  if [[ $HOSTONLY_NETWORKS == "" ]]; then
+    echo "No host-only networks found.  Creating one... "
+    VBoxManage hostonlyif create
+  else
+    echo "Using existing host-only network 'vboxnet0' for VM"
+  fi
 	VBoxManage modifyvm "$VM_NAME" --nic2 hostonly --hostonlyadapter2 vboxnet0 --memory 1024
 
 	# get some filesystem information about our newly-created VM
 	VM_CONFIG_FILE=$(VBoxManage showvminfo "$VM_NAME" --details --machinereadable | grep 'CfgFile=' | cut -d '"' -f2)
 	VM_DIRECTORY=`dirname "$VM_CONFIG_FILE"`
 
-	#echo -n "Setting up CD drive... "
-	#VBoxManage storagectl "$VM_NAME" --name IDE --add ide --controller PIIX4 --bootable on
-	#echo DONE!
+  echo
+	echo "This VM will not have a CD drive.  You may add one using the VirtualBox application."
+  echo
 
 	echo -n "Copying the Bitnami VM disk images into the created VM directory... "
 	eval cp "\"$BITNAMI_DIRECTORY\"/*.vmdk" \"$VM_DIRECTORY\"
