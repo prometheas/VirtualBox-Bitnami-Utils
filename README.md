@@ -1,4 +1,6 @@
 
+*UPDATE*: I've stopped maintaining this project because I've long since switched to using [Vagrant](http://vagrantup.com/) for local development. It's a much better solution. I'm leaving this project up simply for legacy purposes, but will not be maintaining it any further.
+
 This collection of utility scripts is designed to help anyone using Bitnami appliance VMs in tandem with VirtualBox to get started quickly.
 
 The VMs that these scripts set up connect to a private "sandbox" network that is only visible to the host OS (your workstation) and to its guest VMs.  They are not visible to any other machines on your LAN.  But since each VM can see one another, these scripts help you simulate environments with multiple different servers that communicate with eachother (eg, a MySQL server, a PHP application running on Apache, and a nodejs messaging service).
